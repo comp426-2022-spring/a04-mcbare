@@ -77,6 +77,7 @@ app.use((req, res, next) => {
         logdata.referer,
         logdata.useragent
     );
+    next();
 });
 
 // Check endpoint
