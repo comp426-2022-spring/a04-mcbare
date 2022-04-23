@@ -92,7 +92,7 @@ app.get('/app/', (req, res) => {
 
 if (debug) {
     // Log access endpoint
-    app.get('/app/accesslog', (req, res) => {
+    app.get('/app/log/access', (req, res) => {
         const stmt = logdb.prepare('SELECT * FROM accesslog').all()
         res.status(200).json(stmt);
     });
