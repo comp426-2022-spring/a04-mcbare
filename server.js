@@ -93,7 +93,8 @@ app.get('/app/', (req, res) => {
 if (debug) {
     // Log access endpoint
     app.get('/app/accesslog', (req, res) => {
-        res.status(200);
+        const stmt = logdb.prepare('SELECT * FROM accesslog').all()
+        res.status(200).json(stmt);
     });
 
     // Error test endpoint
