@@ -47,7 +47,7 @@ const server = app.listen(port, () => {
     console.log('App listening on port %PORT%'.replace('%PORT%',port));
 });
 
-/*app.use((req, res, next) => {
+app.use((req, res, next) => {
     let logdata = {
         remoteaddr: req.ip,
         remoteuser: req.user,
@@ -62,11 +62,22 @@ const server = app.listen(port, () => {
     }
     const stmt = `
         INSERT INTO accesslog
-        (id,remote_addr,remote_user,datetime,method,url,http_version,status,content_length)
-        VALUES (?,?,?,?,?,?,?,?,?);
+        (remoteaddr,remoteuser,datetime,method,url,protocol,httpversion,status,referer,useragent)
+        VALUES (?,?,?,?,?,?,?,?,?,?);
     `;
-    stmt.run(logdata.useragent,logdata.remoteaddr, logdata.remoteuser, logdata.time, logdata.method, logdata.url, logdata.httpversion, logdata.status, )
-});*/
+    stmt.run(
+        logdata.remoteaddr,
+        logdata.remoteuser,
+        logdata.time,
+        logdata.method,
+        logdata.url,
+        logdata.protocol,
+        logdata.httpversion,
+        logdata.status,
+        logdata.referer,
+        logdata.useragent
+    );
+});
 
 // Check endpoint
 app.get('/app/', (req, res) => {
