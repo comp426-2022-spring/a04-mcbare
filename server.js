@@ -98,7 +98,7 @@ if (debug) {
     app.get('/app/log/access', (req, res) => {
         try {
             const stmt = logdb.prepare('SELECT * FROM accesslog').all()
-            res.status(200).send(req.url);
+            res.status(200).json(stmt);
         } catch {
             console.error(e);
         }
@@ -147,7 +147,7 @@ app.get('/app/flip/call/:call', (req, res) => {
 
 // Default endpoint
 app.use(function(req, res){
-    res.status(404).send('404 NOT FOUND');
+    res.status(404).send('404 NOT FOUND' + req.url);
 });
 
 
