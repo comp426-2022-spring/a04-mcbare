@@ -62,7 +62,7 @@ app.use((req, res, next) => {
     }
     const stmt = logdb.prepare(`
         INSERT INTO accesslog
-        (remoteaddr,remoteuser,datetime,method,url,protocol,httpversion,status,referer,useragent)
+        (remote_addr,remote_user,time,method,url,protocol,http_version,status,referrer_url,user_agent)
         VALUES (?,?,?,?,?,?,?,?,?,?);
     `);
     stmt.run(

@@ -19,16 +19,17 @@ if (row === undefined) {
 // Set a const that will contain your SQL commands to initialize the database.
     const sqlInit = `
         CREATE TABLE accesslog (
-            remoteaddr TEXT,
-            remoteuser TEXT,
-            datetime TEXT,
+            id INTEGER PRIMARY KEY,
+            remote_addr TEXT,
+            remote_user TEXT,
+            time TEXT,
             method TEXT,
             url TEXT,
             protocol TEXT,
-            httpversion TEXT,
+            http_version TEXT,
             status TEXT,
-            referer TEXT,
-            useragent TEXT
+            referrer_url TEXT,
+            user_agent TEXT
         );
     `;
 // Execute SQL commands that we just wrote above.
@@ -40,4 +41,4 @@ if (row === undefined) {
     console.log('Log database exists.')
 }
 // Export all of the above as a module so that we can use it elsewhere.
-module.exports = logdb
+module.exports = logdb;
