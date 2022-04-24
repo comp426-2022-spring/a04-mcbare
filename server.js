@@ -122,11 +122,6 @@ if (log) {
     app.use(morgan('combined', { stream: accessLog }))
 }
 
-// Default endpoint
-app.use(function(req, res){
-    res.status(404).send('404 NOT FOUND' + req.url);
-});
-
 // Multiple flips endpoint
 app.get('/app/flips/:number', (req, res) => {
     var num = parseInt(req.params.number);
@@ -153,6 +148,10 @@ app.get('/app/flip/call/:call', (req, res) => {
     res.status(200).json(out);
 });
 
+// Default endpoint
+app.use(function(req, res){
+    res.status(404).send('404 NOT FOUND' + req.url);
+});
 
 // Coin functions:
 function coinFlip() {
