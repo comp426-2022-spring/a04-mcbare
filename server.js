@@ -39,7 +39,7 @@ args["port"];
 args["debug"];
 args["log"];
 const port = args.port || process.env.PORT || 5555;
-const debug = (args.debug == "true");
+const debug = (args.debug != "false");
 const log = (args.log != "false");
 
 // If --help or -h, echo help text to STDOUT and exit
@@ -96,7 +96,7 @@ app.get('/app/', (req, res) => {
         res.end(res.statusCode+ ' ' +res.statusMessage)
 });
 
-if (!debug) {
+if (debug) {
     // Log access endpoint
     app.get('/app/log/access/', (req, res) => {
         try {
