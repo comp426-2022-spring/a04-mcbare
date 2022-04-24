@@ -95,7 +95,7 @@ app.get('/app/', (req, res) => {
 
 if (debug) {
     // Log access endpoint
-    app.get('/app/log/access', (req, res) => {
+    app.get('/app/log/access/', (req, res) => {
         try {
             const stmt = logdb.prepare('SELECT * FROM accesslog').all()
             res.status(200).json(stmt);
@@ -105,7 +105,7 @@ if (debug) {
     });
 
     // Error test endpoint
-    app.get('/app/error', (req, res) => {
+    app.get('/app/error/', (req, res) => {
         res.status(500);
         throw new Error('Error test successful.');
     });
