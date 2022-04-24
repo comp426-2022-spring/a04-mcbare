@@ -63,7 +63,6 @@ app.use((req, res, next) => {
         referer: req.headers['referer'],
         useragent: req.headers['user-agent']
     }
-    console.log(logdata.url);
     const stmt = logdb.prepare(`
         INSERT INTO accesslog
         (remote_addr,remote_user,time,method,url,protocol,http_version,status,referrer_url,user_agent)
@@ -99,7 +98,7 @@ if (debug) {
     app.get('/app/log/access', (req, res) => {
         try {
             const stmt = logdb.prepare('SELECT * FROM accesslog').all()
-            res.status(200).json(stmt);
+            res.status(200).send(req.url);
         } catch {
             console.error(e);
         }
