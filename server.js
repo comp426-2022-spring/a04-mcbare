@@ -4,6 +4,9 @@ const express = require("express");
 // Require morgan
 const morgan = require("morgan");
 
+// Require fs
+const fs = require("fs");
+
 // Create app using express
 const app = express();
 
