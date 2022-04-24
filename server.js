@@ -1,6 +1,9 @@
 // Require Express.js
 const express = require("express");
 
+// Require morgan
+const morgan = require("morgan");
+
 // Create app using express
 const app = express();
 
@@ -34,7 +37,7 @@ args["debug"];
 args["log"];
 const port = args.port || process.env.PORT || 5555;
 const debug = (args.debug == "true");
-const log = args.log || true;
+const log = (args.log == "true");
 
 // If --help or -h, echo help text to STDOUT and exit
 if (args.help || args.h) {
@@ -92,15 +95,23 @@ app.get('/app/', (req, res) => {
 
 if (debug) {
     // Log access endpoint
-    app.get('/app/log/access', (req, res) => {
+    app.get('/app/log/access/', (req, res) => {
         const stmt = logdb.prepare('SELECT * FROM accesslog').all()
         res.status(200).json(stmt);
     });
 
     // Error test endpoint
-    app.get('/app/error', (req, res) => {
+    app.get('/app/error/', (req, res) => {
         throw new Error('Error test successful.');
     });
+}
+
+if (log) {
+    // Use morgan for logging to files
+    // Create a write stream to append (flags: 'a') to a file
+    const WRITESTREAM = fs.createWriteStream('FILE', { flags: 'a' })
+    // Set up the access logging middleware
+    app.use(morgan('FORMAT', { stream: WRITESTREAM }))
 }
 
 // Multiple flips endpoint
