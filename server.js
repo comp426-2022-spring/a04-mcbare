@@ -63,6 +63,7 @@ app.use((req, res, next) => {
         referer: req.headers['referer'],
         useragent: req.headers['user-agent']
     }
+    console.log(logdata.url);
     const stmt = logdb.prepare(`
         INSERT INTO accesslog
         (remote_addr,remote_user,time,method,url,protocol,http_version,status,referrer_url,user_agent)
