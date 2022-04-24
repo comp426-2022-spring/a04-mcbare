@@ -96,7 +96,7 @@ app.get('/app/', (req, res) => {
         res.end(res.statusCode+ ' ' +res.statusMessage)
 });
 
-if (debug) {
+if (!debug) {
     // Log access endpoint
     app.get('/app/log/access/', (req, res) => {
         try {
